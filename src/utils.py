@@ -1,9 +1,6 @@
 from streamlit.report_thread import get_report_ctx
 from streamlit.hashing import _CodeHasher
 from streamlit.server.server import Server
-
-from functools import wraps
-import pymongo
 import base64
 
 from abc import ABC, abstractmethod
