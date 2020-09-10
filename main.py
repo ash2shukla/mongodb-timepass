@@ -1,7 +1,7 @@
 import streamlit as st
 
 from src.utils import Page, provide_state, get_base_64_img, _skip_hash
-from src.pages import ExplorePage
+from src.pages import ExplorePage, CreatePage
 from pathlib import Path
 from src.db import MongoDBClient
 
@@ -10,7 +10,8 @@ import pymongo
 from typing import Dict, Type
 
 PAGE_MAP: Dict[str, Type[Page]] = {
-    "Explore Data": ExplorePage,
+    "Explore": ExplorePage,
+    "Create": CreatePage
 }
 
 

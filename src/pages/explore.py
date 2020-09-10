@@ -12,7 +12,7 @@ class ExplorePage(Page):
         self.db_client = self.state.db_client
 
     def write(self):
-        st.title("Explore Data")
+        st.title("Explore")
         db_name = st.sidebar.selectbox(
             "Select database: ", self.db_client.get_database_names()
         )

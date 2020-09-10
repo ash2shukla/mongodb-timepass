@@ -17,19 +17,13 @@ class MongoDBClient:
         db = self.conn[db_name]
         return db.list_collection_names()
 
-    @lru_cache(maxsize=1024)
     def get_collection_count(self, db_name, coll_name):
         doc_count = self.conn[db_name][coll_name].count_documents({})
         return doc_count
 
-    def __del__(self):
-        self.conn.close()
-
-    @lru_cache(maxsize=1024)
     def collect_documents(self, db_name, coll_name, page, query, projection, page_size, page_number):
         query = json.loads(query)
         projection = json.loads(projection)
-        st.write("Cache missing:")
         result = []
         if projection != "":
             data = list(self.conn[db_name][coll_name].find(query, projection).skip((page-1)*page_size).limit(page_size))
@@ -39,3 +33,15 @@ class MongoDBClient:
             json_str = json_util.dumps(record)
             result.append(json.loads(json_str))
         return result
+    
+    def create_collection(self, db_name, coll_name):
+        self.conn[db_name].create_collection(coll_name)
+    
+    def insert_docs(self, db_name, coll_name, document):
+        if isinstance(document, dict):
+            self.conn[db_name][coll_name].insert_one(document)
+        elif isinstance(document, list):
+            self.conn[db_name][coll_name].insert_many(document)
+
+    def __del__(self):
+        self.conn.close()
