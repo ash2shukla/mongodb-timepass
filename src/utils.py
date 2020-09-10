@@ -10,20 +10,11 @@ from abc import ABC, abstractmethod
 from copy import deepcopy
 
 from typing import Dict, Any
-import _thread
-import io
+
 
 def _skip_hash(arg):
     pass
 
-# no_hash = {
-#     pymongo.auth._Cache: _skip_hash,
-#     pymongo.pool.PoolOptions: _skip_hash,
-#     pymongo.write_concern.WriteConcern: _skip_hash,
-#     _thread.LockType: _skip_hash,
-#     pymongo.server_description.ServerDescription: _skip_hash,
-#     io.TextIOWrapper: _skip_hash,
-# }
 
 class Page(ABC):
     @abstractmethod
