@@ -17,7 +17,8 @@ git clone
 
 docker-compose up --build 😊
 ```
-**Note: By default COPY is commented out from Dockerfile and the code is mounted as volume in docker-compose.yml to work with hot-reload of streamlit you must uncomment COPY from Dockerfile and remove volume mounts from docker-compose.yml at the time of deployment.**
+**Note: By default COPY is commented out from Dockerfile and the code is mounted as volume in docker-compose.yml to work with hot-reload of streamlit.
+You must uncomment COPY from Dockerfile and remove volume mounts from docker-compose.yml at the time of deployment.**
 
 ### 2. I hate docker 🔪🐳🔪 I will mess up my host system! 🎉
 
