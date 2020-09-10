@@ -1,8 +1,8 @@
 import streamlit as st
 
 import pymongo
-from bson.json_util import dumps
-from json import loads
+from bson import json_util
+import json
 from functools import lru_cache
 
 
@@ -27,8 +27,8 @@ class MongoDBClient:
 
     @lru_cache(maxsize=1024)
     def collect_documents(self, db_name, coll_name, page, query, projection, page_size, page_number):
-        query = loads(query)
-        projection = loads(projection)
+        query = json.loads(query)
+        projection = json.loads(projection)
         st.write("Cache missing:")
         result = []
         if projection != "":
@@ -36,6 +36,6 @@ class MongoDBClient:
         else:
             data = list(self.conn[db_name][coll_name].find(query).skip((page-1)*page_size).limit(page_size))
         for record in data:
-            json_str = dumps(record)
-            result.append(loads(json_str))
+            json_str = json_util.dumps(record)
+            result.append(json.loads(json_str))
         return result
