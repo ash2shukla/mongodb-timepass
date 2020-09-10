@@ -1,12 +1,29 @@
-from streamlit.ReportThread import get_report_ctx
+from streamlit.report_thread import get_report_ctx
 from streamlit.hashing import _CodeHasher
-from streamlit.server.Server import Server
+from streamlit.server.server import Server
+
+from functools import wraps
+import pymongo
+import base64
 
 from abc import ABC, abstractmethod
 from copy import deepcopy
 
 from typing import Dict, Any
+import _thread
+import io
 
+def _skip_hash(arg):
+    pass
+
+# no_hash = {
+#     pymongo.auth._Cache: _skip_hash,
+#     pymongo.pool.PoolOptions: _skip_hash,
+#     pymongo.write_concern.WriteConcern: _skip_hash,
+#     _thread.LockType: _skip_hash,
+#     pymongo.server_description.ServerDescription: _skip_hash,
+#     io.TextIOWrapper: _skip_hash,
+# }
 
 class Page(ABC):
     @abstractmethod
@@ -105,3 +122,9 @@ def provide_state(hash_funcs=None):
 
         return wrapper
     return inner
+
+
+def get_base_64_img(path, format="png", width="", height=""):
+    img_bytes = open(path, "rb").read()
+    b64_bytes = base64.b64encode(img_bytes).decode()
+    return f'<img src=data:image/{format};base64,{b64_bytes} width="{width}" height="{height}">'

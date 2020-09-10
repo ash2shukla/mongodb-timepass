@@ -1,4 +1,3 @@
-from .page1 import Page1
-from .page2 import Page2
+from .explore import ExplorePage
 
-__all__ = ["Page1", "Page2"]
+__all__ = ["ExplorePage",]
