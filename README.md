@@ -9,7 +9,7 @@ Just a mongodb related project to pass time *(Thus MongoDB TimePass Ba-dum-tss! 
 
 ## Features:
 1. Explore MongoDB instances ( Collections, Databases, Paginated queries, filters, projection ) ✅
-2. Insertion, Update, Delete ( *TODO* ) 📝
+2. Insertion, Update, Delete ✅
 3. Schema Analysis ( *TODO* ) 📝
 4. Profiling based graphs ( *TODO* ) 📝
 
